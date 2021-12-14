@@ -26,6 +26,25 @@ pipeline {
                                  }
                           }
                 }
+                stage('Docker Build') {
+                        steps {
+                                sh 'docker build -t sihamlogwire/account:1.0 .'
+                         }
+                }
+
+                stage('Test Image') {
+                        steps {
+                                 sh 'docker run -tid -p  8082:8080 sihamlogwire/account:1.0'
+                         }
+                }
+
+
+                 stage('Docker Push') {
+                        steps {
+                                withCredentials([usernamePassword(credentialsId:'dockerHub',passwordVariable: 'dockerHubPassword',usernameVariable: 'dockerHubUser')]) {
+                                        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                                        sh 'docker push sihamlogwire/account:1.0'
+                                 }
 		
 
 	}
