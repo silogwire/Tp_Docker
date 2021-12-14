@@ -46,6 +46,7 @@ pipeline {
                                         sh 'docker push sihamlogwire/account:1.0'
                                  }
 		
-
+			}
+		}
 	}
 }
