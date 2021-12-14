@@ -12,16 +12,13 @@ pipeline {
 	               		 sh 'mvn  -B -DskipTests clean package'
        			 }
 		}
-                 stage('Tests') {
+                 stage('archive artifacts') {
                          steps {
                                  sh 'mvn test'
                 }
                          post {
                                  always {
-                                         junit 'target/surefire-reports/*.xml'
-                         }
 
-                                 success {
                                          stash(name: 'artifact', includes: 'target/*.war')
                                          stash(name: 'pom', includes: 'pom.xml')
                                          // to add artifacts in jenkins pipeline tab (UI)
