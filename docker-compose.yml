@@ -21,16 +21,48 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: root
-   web:
-    build:
-      context: .       
-    depends_on:
-      - db
-    image: tomcat
+   apache-demo:
+    build: ./conf
+    container_name: apache-demo
+    ports:
+      - "80:80"
+      - "81:81"
+      - "10080:10080"
+    volumes:
+      - ./conf/my-httpd-mod_jk.conf:/usr/local/apache2/conf/httpd.conf
+      - ./conf/mod_jk.conf:/usr/local/apache2/conf/extra/mod_jk.conf
+      - ./conf/workers.properties:/usr/local/apache2/conf/extra/workers.properties
+   my-tomcat-1:
+    build: .
+    container_name: my-tomcat-1
+    ports:
+      - "8888:8080"
+    expose:
+      - "8009"
     volumes:
       - ./target/account-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/account-1.0-SNAPSHOT.war
+      - ./tomcat/webapps/:/usr/local/tomcat/webapps/
+      - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+    depends_on:
+      - db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: accounts
+      MYSQL_USER: hellokoding
+      MYSQL_PASSWORD: root
+   my-tomcat-2:
+    build: .
+    container_name: my-tomcat-2
     ports:
-      - '8083:8080'
+      - "8889:8080"
+    expose:
+      - "8009"
+    volumes:
+      - ./target/account-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/account-1.0-SNAPSHOT.war
+      - ./tomcat/webapps/:/usr/local/tomcat/webapps/
+      - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
+    depends_on:
+      - db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: accounts
