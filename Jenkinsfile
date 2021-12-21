@@ -37,7 +37,7 @@ pipeline {
                 }
 	        stage('Docker Build and Tag Mode_Jk Image') {
                         steps {
-                                sh 'docker build -t apache_JK:latest ./conf' 
+                                sh 'docker build -t apache_JK:latest conf/' 
                 		//sh 'docker tag apache_JK nsihamlogwire/apache_JK:latest'
                 		sh 'docker tag apache_JK sihamlogwire/apache_JK:$BUILD_NUMBER'
 				
