@@ -37,9 +37,10 @@ pipeline {
                 }
 	        stage('Docker Build and Tag Mode_Jk Image') {
                         steps {
-                                sh 'docker build -t apache_JK:latest conf/' 
-                		//sh 'docker tag apache_JK nsihamlogwire/apache_JK:latest'
-                		sh 'docker tag apache_JK sihamlogwire/apache_JK:$BUILD_NUMBER'
+                                sh 'docker build -t account:latest .' 
+                                sh 'docker build -t apache_jk:latest ./conf' 
+                		//sh 'docker tag apache_jk nsihamlogwire/apache_JK:latest'
+                		sh 'docker tag apache_jk sihamlogwire/apache_JK:$BUILD_NUMBER'
 				
                          }
                 }
@@ -56,7 +57,7 @@ pipeline {
                                 withCredentials([usernamePassword(credentialsId:'dockerHub',passwordVariable: 'dockerHubPassword',usernameVariable: 'dockerHubUser')]) {
                                         sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
                                         sh 'docker push sihamlogwire/account:$BUILD_NUMBER'
-					sh 'docker push sihamlogwire/apache_JK:$BUILD_NUMBER'
+					sh 'docker push sihamlogwire/apache_jk:$BUILD_NUMBER'
                                  }
 		
 			}
