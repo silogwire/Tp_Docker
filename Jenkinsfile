@@ -26,24 +26,37 @@ pipeline {
                                  }
                           }
                 }
-                stage('Docker Build') {
+		
+                stage('Docker Build and Tag Tomcat Image') {
                         steps {
-                                sh 'docker build -t sihamlogwire/account:1.0 .'
+                                sh 'docker build -t account:latest .' 
+                		//sh 'docker tag samplewebapp nsihamlogwire/account:latest'
+                		sh 'docker tag samplewebapp sihamlogwire/account:$BUILD_NUMBER'
+				
+                         }
+                }
+	        stage('Docker Build and Tag Mode_Jk Image') {
+                        steps {
+                                sh 'docker build -t apache_JK:latest ./conf' 
+                		//sh 'docker tag samplewebapp nsihamlogwire/apache_JK:latest'
+                		sh 'docker tag samplewebapp sihamlogwire/apache_JK:$BUILD_NUMBER'
+				
                          }
                 }
 
-                stage('Test Image') {
-                        steps {
-                                 sh 'docker run -tid -p  8082:8080 sihamlogwire/account:1.0'
-                         }
-                }
+              //  stage('Test Image') {
+              //          steps {
+              //                   sh 'docker run -tid -p  8082:8080 sihamlogwire/account:1.0'
+                //         }
+                //}
 
 
                  stage('Docker Push') {
                         steps {
                                 withCredentials([usernamePassword(credentialsId:'dockerHub',passwordVariable: 'dockerHubPassword',usernameVariable: 'dockerHubUser')]) {
                                         sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                                        sh 'docker push sihamlogwire/account:1.0'
+                                        sh 'docker push sihamlogwire/account:$BUILD_NUMBER'
+					sh 'docker push sihamlogwire/apache_JK:$BUILD_NUMBER'
                                  }
 		
 			}
