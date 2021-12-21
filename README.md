@@ -3,7 +3,7 @@
 ##  Guide
 https://hellokoding.com/registration-and-login-example-with-spring-xml-configuration-maven-jsp-and-mysql/
 
-## Prerequisites
+##  Prerequisites
 - JDK 1.8 or later
 - Maven 3 or later
 - MySQL 5.6 or later
