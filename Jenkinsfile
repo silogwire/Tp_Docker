@@ -55,7 +55,7 @@ pipeline {
 			}
 		}
 
-		stage('Test Image') {
+		stage('Test With Docker-Compose') {
                         steps {
                                  sh 'docker-compose up -d'
                        }
