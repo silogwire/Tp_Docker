@@ -52,6 +52,7 @@ pipeline {
                                         sh 'docker push sihamlogwire/account:$BUILD_NUMBER'
 					sh 'docker push sihamlogwire/apache_jk:$BUILD_NUMBER'
                                  }
+			}
 		}
 
 		stage('Test Image') {
