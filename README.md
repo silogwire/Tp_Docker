@@ -1,6 +1,6 @@
 # Registration and Login Example with Spring MVC, Spring Security, Spring Data JPA, XML Configuration, Maven, JSP, and MySQL.
 
-## Guide
+##  Guide
 https://hellokoding.com/registration-and-login-example-with-spring-xml-configuration-maven-jsp-and-mysql/
 
 ## Prerequisites
