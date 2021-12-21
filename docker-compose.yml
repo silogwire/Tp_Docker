@@ -41,6 +41,7 @@ services:
       - "8009"
     volumes:
       - ./target/account-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/account-1.0-SNAPSHOT.war
+      - ./tomcat/webapps:/usr/local/tomcat/webapps
       - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
     depends_on:
       - db
@@ -58,6 +59,7 @@ services:
       - "8009"
     volumes:
       - ./target/account-1.0-SNAPSHOT.war:/usr/local/tomcat/webapps/account-1.0-SNAPSHOT.war
+      - ./tomcat/webapps:/usr/local/tomcat/webapps
       - ./tomcat/server.xml:/usr/local/tomcat/conf/server.xml
     depends_on:
       - db
