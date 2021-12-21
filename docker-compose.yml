@@ -23,7 +23,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
    apache-demo:
     image: sihamlogwire/apache_jk:$BUILD_NUMBER
-    container_name: apache-demo
+    container_name: apache-demo-$BUILD_NUMBER
     ports:
       - "80:80"
       - "81:81"
@@ -34,7 +34,7 @@ services:
       - ./conf/workers.properties:/usr/local/apache2/conf/extra/workers.properties
    my-tomcat-1:
     image: sihamlogwire/account:$BUILD_NUMBER
-    container_name: my-tomcat-1
+    container_name: my-tomcat-1-$BUILD_NUMBER
     ports:
       - "8888:8080"
     expose:
@@ -52,7 +52,7 @@ services:
       MYSQL_PASSWORD: root
    my-tomcat-2:
     image: sihamlogwire/account:$BUILD_NUMBER
-    container_name: my-tomcat-2
+    container_name: my-tomcat-2-$BUILD_NUMBER
     ports:
       - "8889:8080"
     expose:
