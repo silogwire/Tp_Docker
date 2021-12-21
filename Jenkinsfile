@@ -39,8 +39,8 @@ pipeline {
                         steps {
                                 sh 'docker build -t account:latest .' 
                                 sh 'docker build -t apache_jk:latest ./conf' 
-                		//sh 'docker tag apache_jk nsihamlogwire/apache_JK:latest'
-                		sh 'docker tag apache_jk sihamlogwire/apache_JK:$BUILD_NUMBER'
+                		//sh 'docker tag apache_jk nsihamlogwire/apache_jk:latest'
+                		sh 'docker tag apache_jk sihamlogwire/apache_jk:$BUILD_NUMBER'
 				
                          }
                 }
