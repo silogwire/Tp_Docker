@@ -45,13 +45,6 @@ pipeline {
                          }
                 }
 
-              //  stage('Test Image') {
-              //          steps {
-              //                   sh 'docker run -tid -p  8082:8080 sihamlogwire/account:1.0'
-                //         }
-                //}
-
-
                  stage('Docker Push') {
                         steps {
                                 withCredentials([usernamePassword(credentialsId:'dockerHub',passwordVariable: 'dockerHubPassword',usernameVariable: 'dockerHubUser')]) {
@@ -59,6 +52,12 @@ pipeline {
                                         sh 'docker push sihamlogwire/account:$BUILD_NUMBER'
 					sh 'docker push sihamlogwire/apache_jk:$BUILD_NUMBER'
                                  }
+		stage('Test Image') {
+                        steps {
+                                 sh 'docker-compose up -d'
+                       }
+              }
+
 		
 			}
 		}
