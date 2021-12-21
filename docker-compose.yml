@@ -22,7 +22,7 @@ services:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: root
    apache-demo:
-    build: ./conf
+    image: sihamlogwire/apache_jk:$BUILD_NUMBER
     container_name: apache-demo
     ports:
       - "80:80"
@@ -33,7 +33,7 @@ services:
       - ./conf/mod_jk.conf:/usr/local/apache2/conf/extra/mod_jk.conf
       - ./conf/workers.properties:/usr/local/apache2/conf/extra/workers.properties
    my-tomcat-1:
-    build: .
+    image: sihamlogwire/account:$BUILD_NUMBER
     container_name: my-tomcat-1
     ports:
       - "8888:8080"
@@ -51,7 +51,7 @@ services:
       MYSQL_USER: hellokoding
       MYSQL_PASSWORD: root
    my-tomcat-2:
-    build: .
+    image: sihamlogwire/account:$BUILD_NUMBER
     container_name: my-tomcat-2
     ports:
       - "8889:8080"
